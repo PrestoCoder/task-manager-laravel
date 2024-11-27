@@ -24,7 +24,7 @@ npm install
 cp .env.example .env
 ```
 
-4. Set up these AWS database credentials in `.env`, the database is already hosted on AWS EC2, no need to create on local:
+4. Set up your AWS database credentials in `.env`:
 
 ```env
 DB_CONNECTION=mysql
@@ -41,9 +41,7 @@ DB_PASSWORD=Chhibba/123456
 php artisan key:generate
 ```
 
-6. Since the database is already set up on AWS, you can skip migrations.
-
-7. Start the application
+6. Start the application
 
 ```bash
 # In one terminal
@@ -53,7 +51,26 @@ php artisan serve
 npm run dev
 ```
 
-8. Visit http://127.0.0.1:8000 in your browser
+7. Visit http://127.0.0.1:8000 in your browser
+
+## Database Visualization
+
+You can view and interact with the database using any MySQL database viewer (like DBeaver):
+
+1. Open DBeaver or your preferred MySQL viewer
+2. Create a new MySQL connection with these credentials:
+    - Host: 52.87.148.108
+    - Port: 3306
+    - Database: taskManager
+    - Username: root
+    - Password: Chhibba/123456
+
+This will allow you to:
+
+-   View table structures
+-   Execute SQL queries
+-   Monitor database changes
+-   View relationships between tables
 
 ## Features
 
@@ -91,38 +108,6 @@ npm run dev
 
 -   Use the project dropdown to filter tasks
 -   Select "All Projects" to see everything
-
-## Troubleshooting
-
-### Database Connection Issues
-
--   Ensure AWS security group allows connections from your IP
--   Verify the database credentials in `.env`
--   Check if you can connect using a MySQL client:
-
-```bash
-mysql -h 52.87.148.108 -u root -p
-```
-
-### Common Issues
-
-1. "Unable to connect to database"
-
-    - Check if AWS RDS instance is running
-    - Verify network/firewall settings
-    - Try connecting with a MySQL client
-
-2. "CSRF token mismatch"
-    - Clear browser cache
-    - Refresh the page
-
-## Need Help?
-
-Check Laravel logs for errors:
-
-```bash
-tail -f storage/logs/laravel.log
-```
 
 ## License
 
