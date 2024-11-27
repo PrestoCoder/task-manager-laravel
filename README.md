@@ -1,6 +1,6 @@
 # Laravel Task Manager
 
-A modern task management system with drag-and-drop functionality and project organization.
+A modern task management system using Laravel with server-side rendering and AJAX for dynamic updates. Features drag-and-drop functionality and project organization without any frontend build requirements.
 
 ## Setup with AWS Database
 
@@ -11,11 +11,10 @@ git clone https://github.com/yourusername/task-manager.git
 cd task-manager
 ```
 
-2. Install dependencies
+2. Install PHP dependencies
 
 ```bash
 composer install
-npm install
 ```
 
 3. Configure environment
@@ -44,14 +43,22 @@ php artisan key:generate
 6. Start the application
 
 ```bash
-# In one terminal
 php artisan serve
-
-# In another terminal
-npm run dev
 ```
 
 7. Visit http://127.0.0.1:8000 in your browser
+
+## Technical Architecture
+
+This application uses:
+
+-   Server-side rendering with Laravel Blade templates
+-   AJAX for dynamic updates without page reloads
+-   jQuery for handling AJAX requests
+-   SortableJS for drag-and-drop functionality
+-   No frontend build process required
+
+All interactions (create, update, delete, reorder) happen through AJAX calls, providing a smooth user experience while maintaining the simplicity of server-side rendering.
 
 ## Database Visualization
 
@@ -77,8 +84,9 @@ This will allow you to:
 -   Create, edit, and delete tasks
 -   Organize tasks by projects
 -   Drag-and-drop task reordering
--   Real-time updates (no page reloads)
+-   Real-time updates via AJAX
 -   Project filtering
+-   No page reloads required for any operation
 
 ## Usage
 
@@ -89,25 +97,29 @@ This will allow you to:
     - Enter task name
     - Select project (optional)
     - Click "Add Task"
+    - Task appears instantly via AJAX
 
 2. **Edit Task**
 
     - Click "Edit" on any task
     - Update details in the popup
     - Click "Save"
+    - Changes update instantly
 
 3. **Delete Task**
 
     - Click "Delete" on any task
+    - Task removes instantly
 
 4. **Reorder Tasks**
     - Drag tasks using the ≡ handle
-    - Priority updates automatically
+    - Priority updates automatically via AJAX
 
 ### Project Management
 
 -   Use the project dropdown to filter tasks
 -   Select "All Projects" to see everything
+-   Filtering happens instantly without page reload
 
 ## License
 
