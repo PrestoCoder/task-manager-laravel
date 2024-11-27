@@ -1,28 +1,8 @@
 # Laravel Task Manager
 
-A modern task management application built with Laravel, featuring drag-and-drop reordering, project organization, and AJAX interactions.
+A modern task management system with drag-and-drop functionality and project organization.
 
-![Task Manager Screenshot](screenshot.png)
-
-## Features
-
--   ✨ Create, edit, and delete tasks
--   🔄 Drag-and-drop task reordering
--   📁 Project organization
--   ⚡ AJAX operations (no page reloads)
--   🎨 Clean, responsive UI with Tailwind CSS
--   🏷️ Task prioritization
--   📱 Mobile-friendly design
-
-## Requirements
-
--   PHP >= 8.1
--   Composer
--   MySQL/MariaDB
--   Node.js & NPM
--   Git
-
-## Installation
+## Setup with AWS Database
 
 1. Clone the repository
 
@@ -31,201 +11,119 @@ git clone https://github.com/yourusername/task-manager.git
 cd task-manager
 ```
 
-2. Install PHP dependencies
+2. Install dependencies
 
 ```bash
 composer install
-```
-
-3. Install NPM dependencies
-
-```bash
 npm install
 ```
 
-4. Create and configure environment file
+3. Configure environment
 
 ```bash
 cp .env.example .env
 ```
 
-5. Configure your database in `.env`
+4. Set up your AWS database credentials in `.env`:
 
 ```env
 DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
+DB_HOST=52.87.148.108
 DB_PORT=3306
-DB_DATABASE=task_manager
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
+DB_DATABASE=taskManager
+DB_USERNAME=root
+DB_PASSWORD=Chhibba/123456
 ```
 
-6. Generate application key
+5. Generate application key
 
 ```bash
 php artisan key:generate
 ```
 
-7. Create the database
+6. Since the database is already set up on AWS, you can skip migrations.
 
-```sql
-mysql -u root -p
-CREATE DATABASE task_manager;
-```
-
-8. Run migrations
+7. Start the application
 
 ```bash
-php artisan migrate
-```
-
-9. Seed sample projects (optional)
-
-```bash
-php artisan tinker
->>> App\Models\Project::create(['name' => 'Personal']);
->>> App\Models\Project::create(['name' => 'Work']);
-```
-
-## Running the Application
-
-1. Start the Laravel development server
-
-```bash
+# In one terminal
 php artisan serve
-```
 
-2. In a separate terminal, start the Vite development server
-
-```bash
+# In another terminal
 npm run dev
 ```
 
-3. Visit http://127.0.0.1:8000 in your browser
+8. Visit http://127.0.0.1:8000 in your browser
+
+## Features
+
+-   Create, edit, and delete tasks
+-   Organize tasks by projects
+-   Drag-and-drop task reordering
+-   Real-time updates (no page reloads)
+-   Project filtering
 
 ## Usage
 
 ### Managing Tasks
 
-1. **Creating Tasks**
+1. **Add Task**
 
-    - Enter task name in the input field
-    - (Optional) Select a project from the dropdown
+    - Enter task name
+    - Select project (optional)
     - Click "Add Task"
 
-2. **Editing Tasks**
+2. **Edit Task**
 
-    - Click the "Edit" button on any task
-    - Modify the task details in the modal
+    - Click "Edit" on any task
+    - Update details in the popup
     - Click "Save"
 
-3. **Deleting Tasks**
+3. **Delete Task**
 
-    - Click the "Delete" button on any task
-    - Confirm the deletion
+    - Click "Delete" on any task
 
-4. **Reordering Tasks**
-    - Drag and drop tasks using the ≡ handle
+4. **Reorder Tasks**
+    - Drag tasks using the ≡ handle
     - Priority updates automatically
 
 ### Project Management
 
-1. **Filtering Tasks**
-    - Select a project from the filter dropdown
-    - View tasks specific to that project
-    - Select "All Projects" to view everything
+-   Use the project dropdown to filter tasks
+-   Select "All Projects" to see everything
 
-## Project Structure
+## Troubleshooting
 
-```
-task-manager/
-├── app/
-│   ├── Http/
-│   │   └── Controllers/
-│   │       └── TaskController.php
-│   └── Models/
-│       ├── Task.php
-│       └── Project.php
-├── database/
-│   └── migrations/
-│       ├── create_projects_table.php
-│       └── create_tasks_table.php
-├── resources/
-│   └── views/
-│       └── tasks/
-│           ├── index.blade.php
-│           └── _list.blade.php
-└── routes/
-    └── web.php
-```
+### Database Connection Issues
 
-## Key Technologies
-
--   [Laravel](https://laravel.com/) - PHP Framework
--   [MySQL](https://www.mysql.com/) - Database
--   [Tailwind CSS](https://tailwindcss.com/) - Styling
--   [SortableJS](https://sortablejs.github.io/Sortable/) - Drag and Drop
--   [jQuery](https://jquery.com/) - AJAX Operations
-
-## Development
-
-### Running Tests
+-   Ensure AWS security group allows connections from your IP
+-   Verify the database credentials in `.env`
+-   Check if you can connect using a MySQL client:
 
 ```bash
-php artisan test
+mysql -h 52.87.148.108 -u root -p
 ```
 
-### Code Style
+### Common Issues
+
+1. "Unable to connect to database"
+
+    - Check if AWS RDS instance is running
+    - Verify network/firewall settings
+    - Try connecting with a MySQL client
+
+2. "CSRF token mismatch"
+    - Clear browser cache
+    - Refresh the page
+
+## Need Help?
+
+Check Laravel logs for errors:
 
 ```bash
-# Fix code style
-./vendor/bin/pint
+tail -f storage/logs/laravel.log
 ```
-
-### Development Server
-
-```bash
-php artisan serve
-npm run dev
-```
-
-## Common Issues & Solutions
-
-1. **CSRF Token Mismatch**
-
-    - Ensure meta tag exists: `<meta name="csrf-token" content="{{ csrf_token() }}">`
-    - Check jQuery AJAX setup has correct headers
-
-2. **Database Connection**
-
-    - Verify `.env` database credentials
-    - Ensure database exists
-    - Run `php artisan config:clear`
-
-3. **Missing Views**
-    - Check view files exist in correct locations
-    - Run `php artisan view:clear`
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
--   [Laravel Documentation](https://laravel.com/docs)
--   [Tailwind CSS](https://tailwindcss.com/)
--   [SortableJS](https://sortablejs.github.io/Sortable/)
-
-## Contact
-
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
-
-Project Link: [https://github.com/yourusername/task-manager](https://github.com/yourusername/task-manager)
+MIT License
