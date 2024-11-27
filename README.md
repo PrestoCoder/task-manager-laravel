@@ -24,7 +24,7 @@ npm install
 cp .env.example .env
 ```
 
-4. Set up your AWS database credentials in `.env`, the database is already hosted on AWS EC2, no need to create on local:
+4. Set up these AWS database credentials in `.env`, the database is already hosted on AWS EC2, no need to create on local:
 
 ```env
 DB_CONNECTION=mysql
