@@ -7,7 +7,7 @@ A modern task management system using Laravel with server-side rendering and AJA
 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/task-manager.git
+git clone https://github.com/PrestoCoder/task-manager-laravel
 cd task-manager
 ```
 
